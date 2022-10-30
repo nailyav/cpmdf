@@ -15,6 +15,16 @@ class Joke {
         id = json['id'],
         url = json['url'],
         value = json['value'];
+
+  Map<String, dynamic> toJson() => {
+    'icon_url' : iconUrl,
+    'id' : id,
+    'url' : url,
+    'value' : value
+  };
+
+  // factory Joke.fromJson(Map<String, dynamic> json) => _$Joke(json);
+  // Map<String, dynamic> toJson() => _$Joke(this);
 }
 
 final jokeProvider = Provider<Joke>((ref) {

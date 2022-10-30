@@ -45,7 +45,7 @@ class MyHomePage extends ConsumerWidget {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                    builder: ((context) => const FavouritesPage()),
+                    builder: ((context) => FavouritesPage()),
                 ),
               );
             }
