@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+
 @JsonSerializable()
 class Joke {
   final String iconUrl;

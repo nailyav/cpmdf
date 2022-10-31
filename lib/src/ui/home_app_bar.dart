@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:cpmdf/src/application/fetch_favourites.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 

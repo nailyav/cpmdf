@@ -1,8 +1,7 @@
-import 'package:cpmdf/src/application/fetch_favourites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import 'package:cpmdf/src/ui/favourites_app_bar.dart';
+import 'package:cpmdf/src/application/fetch_favourites.dart';
 
 
 class FavouritesPage extends ConsumerWidget {
@@ -23,16 +22,28 @@ class FavouritesPage extends ConsumerWidget {
               builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
                 if (snapshot.hasData) {
                   final data = snapshot.data as List;
-                  return ListView.builder(
-                      scrollDirection: Axis.vertical,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.all(8),
-                      itemCount: data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Text(data[index].value);
-                      }
-                  );
-                }
+                  return Expanded(
+                      child: ListView.builder(
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(8),
+                          itemCount: data.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Card(
+                              child: ListTile(
+                                title: Text(data[index].value),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    snapshot.data![index].isFavourite
+                                        ? ref.read(fetchFavouritesProvider.notifier).removeFavourite(snapshot.data![index].id)
+                                        : ref.read(fetchFavouritesProvider.notifier).addFavourite(snapshot.data![index]);
+                                  }
+                                ),
+                              ),
+                          );}
+                      )
+                );}
                 return const CircularProgressIndicator();
               }
             ),

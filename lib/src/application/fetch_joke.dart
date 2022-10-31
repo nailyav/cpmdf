@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 
+
 Future<Joke> fetchJoke() async {
   final response =
   await http.get(Uri.parse('https://api.chucknorris.io/jokes/random'));
@@ -31,9 +32,7 @@ final callApiProvider = NotifierProvider<CallApi, Future<Joke>>(() {
   return CallApi();
 });
 
-final fetchJokeProvider = FutureProvider<Joke>((ref) {
-  // final callApi = ref.watch(callApiProvider);
-  // return callApi.fetchJoke();
-  final joke = ref.watch(callApiProvider);
-  return joke;
-});
+// final fetchJokeProvider = FutureProvider<Joke>((ref) {
+//   final joke = ref.watch(callApiProvider);
+//   return joke;
+// });
