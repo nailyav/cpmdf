@@ -7,6 +7,7 @@ class Joke {
   final String id;
   final String url;
   final String value;
+  bool isFavourite = false;
 
   Joke(this.iconUrl, this.id, this.url, this.value);
 

@@ -1,7 +1,8 @@
 import 'package:cpmdf/src/application/fetch_favourites.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cpmdf/src/ui/app_bar.dart';
+
+import 'package:cpmdf/src/ui/favourites_app_bar.dart';
 
 
 class FavouritesPage extends ConsumerWidget {
@@ -12,7 +13,7 @@ class FavouritesPage extends ConsumerWidget {
     final Future<List> favourites = ref.watch(fetchFavouritesProvider);
 
     return Scaffold(
-      appBar: const MyAppBar('Favourites'),
+      appBar: const FavouritesAppBar('Favourites'),
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(

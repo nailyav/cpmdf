@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/application/fetch_joke.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
-import 'package:cpmdf/src/ui/app_bar.dart';
+import 'package:cpmdf/src/ui/home_app_bar.dart';
 
 
 class HomePage extends ConsumerWidget {
@@ -13,7 +13,7 @@ class HomePage extends ConsumerWidget {
     final joke = ref.watch(callApiProvider);
 
     return Scaffold(
-      appBar: const MyAppBar('Tinder with Chuck Norris'),
+      appBar: HomeAppBar(joke, 'Tinder with Chuck Norris'),
       body: Center(
         child: SafeArea(
           bottom: false,

@@ -41,7 +41,7 @@ class FetchFavourites extends Notifier<Future<List>> {
     return data.map((joke) => Joke.fromJson(joke)).toList();
   }
 
-  Future<List> writeJson(Joke newJoke) async {
+  Future<List> addJokeJson(Joke newJoke) async {
     // final file = await getLocalFile();
     File file = File(await getLocalPath());
     favourites.add(newJoke);
@@ -50,6 +50,13 @@ class FetchFavourites extends Notifier<Future<List>> {
     file.writeAsStringSync(json.encode(favourites));
 
     return favourites;
+  }
+
+  Future<List> removeJokeJson(List list) async {
+    File file = File(await getLocalPath());
+    file.writeAsStringSync(json.encode(list));
+
+    return list;
   }
 
   @override
@@ -66,11 +73,18 @@ class FetchFavourites extends Notifier<Future<List>> {
   }
 
   void addFavourite(Joke joke) {
-    state = writeJson(joke);
+    joke.isFavourite = true;
+    state = addJokeJson(joke);
   }
 
-  void deleteFavourite(int id) {
-
+  void removeFavourite(String id) async {
+    final joke = favourites.singleWhere((element) =>
+    element.id == id, orElse: () {
+      return null;
+    });
+    joke.isFavourite = false;
+    favourites.removeWhere((element) => element.id == id);
+    state = removeJokeJson(favourites);
   }
 }
 

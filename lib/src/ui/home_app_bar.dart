@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cpmdf/src/ui/favourites_page.dart';
+
+import 'package:cpmdf/src/application/fetch_favourites.dart';
+import 'package:cpmdf/src/domain/joke_model.dart';
 
 
-class MyAppBar extends ConsumerWidget implements PreferredSizeWidget {
-  const MyAppBar(this.title, {super.key});
+class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
+  const HomeAppBar(this.joke, this.title, {super.key});
+  final Future<Joke> joke;
   final String title;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // final favourites = ref.watch(fetchFavouritesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -34,18 +38,25 @@ class MyAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          IconButton(
-              icon: const Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: ((context) => const FavouritesPage()),
-                  ),
+          FutureBuilder<Joke>(
+            future: joke,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return IconButton(
+                    icon: Icon(
+                      snapshot.data!.isFavourite ? Icons.favorite : Icons.favorite_border,
+                    ),
+                    onPressed: ()
+                    {
+                      snapshot.data!.isFavourite ? ref.read(fetchFavouritesProvider.notifier).removeFavourite(snapshot.data!.id)
+                          : ref.read(fetchFavouritesProvider.notifier).addFavourite(snapshot.data!);
+                    }
                 );
+              } else if (snapshot.hasError) {
+                return Text('${snapshot.error}');
               }
+              return const CircularProgressIndicator();
+            },
           ),
         ],
       ),
