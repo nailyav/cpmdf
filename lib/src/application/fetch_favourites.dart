@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/services.dart' as rootBundle;
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
@@ -17,43 +16,22 @@ class FetchFavourites extends Notifier<Future<List>> {
     return '$path/favourites.json';
   }
 
-  void createFile() async {
-    File file = File(await getLocalPath());
-    Joke joke = Joke("", "0", "", "this is a demo joke");
-    favourites.add(joke);
-    favourites.map((joke) => joke.toJson()).toList();
-
-    file.writeAsStringSync(json.encode(favourites));
-  }
-
   Future<File> getLocalFile() async {
-    createFile();
     File file = File(await getLocalPath());
-    print('File created successfully!');
     return file;
   }
 
-  Future<List> readJson() async {
+  Future<List> writeJokeJson(Joke newJoke) async {
     final file = await getLocalFile();
-    final String response = await file.readAsString();
-    final data = await jsonDecode(response) as List<dynamic>;
-
-    return data.map((joke) => Joke.fromJson(joke)).toList();
-  }
-
-  Future<List> addJokeJson(Joke newJoke) async {
-    // final file = await getLocalFile();
-    File file = File(await getLocalPath());
     favourites.add(newJoke);
     favourites.map((joke) => joke.toJson()).toList();
-
     file.writeAsStringSync(json.encode(favourites));
 
     return favourites;
   }
 
-  Future<List> removeJokeJson(List list) async {
-    File file = File(await getLocalPath());
+  Future<List> writeListJson(List list) async {
+    final file = await getLocalFile();
     file.writeAsStringSync(json.encode(list));
 
     return list;
@@ -61,20 +39,12 @@ class FetchFavourites extends Notifier<Future<List>> {
 
   @override
   Future<List> build() {
-    return readJson();
-  }
-
-  void getFavourites() {
-    try {
-      state = readJson();
-    } on Exception catch (e) {
-      print(e);
-    }
+    return writeListJson(favourites);
   }
 
   void addFavourite(Joke joke) {
     joke.isFavourite = true;
-    state = addJokeJson(joke);
+    state = writeJokeJson(joke);
   }
 
   void removeFavourite(String id) async {
@@ -84,7 +54,7 @@ class FetchFavourites extends Notifier<Future<List>> {
     });
     joke.isFavourite = false;
     favourites.removeWhere((element) => element.id == id);
-    state = removeJokeJson(favourites);
+    state = writeListJson(favourites);
   }
 }
 

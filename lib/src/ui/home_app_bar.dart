@@ -12,7 +12,7 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // final favourites = ref.watch(fetchFavouritesProvider);
+    ref.watch(fetchFavouritesProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -58,6 +58,23 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
               return const CircularProgressIndicator();
             },
           ),
+          // IconButton(
+          //   icon: const Icon(
+          //     Icons.favorite_outline,
+          //     color: Colors.white,
+          //   ),
+          //   onPressed: () {
+          //     icon: const Icon(
+          //       Icons.favorite,
+          //       color: Colors.white,
+          //     );
+          //     Navigator.of(context).push(
+          //       MaterialPageRoute(
+          //         builder: ((context) => const FavouritesPage()),
+          //       ),
+          //     );
+          //   }
+          // ),
         ],
       ),
     );
