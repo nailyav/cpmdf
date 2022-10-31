@@ -1,33 +1,22 @@
-import 'dart:convert';
-import 'dart:ffi';
-
 import 'package:cpmdf/src/application/fetch_favourites.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../domain/joke_model.dart';
+import 'package:cpmdf/src/ui/app_bar.dart';
 
 
 class FavouritesPage extends ConsumerWidget {
-  FavouritesPage({super.key});
+  const FavouritesPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final Future<List> favourites = ref.watch(fetchFavouritesProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Favourites',
-        ),
-      ),
+      appBar: const MyAppBar('Favourites'),
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            // Display the data loaded from sample.json
             FutureBuilder<List<dynamic>>(
             future: favourites,
               builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {

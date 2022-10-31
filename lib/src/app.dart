@@ -12,7 +12,7 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepOrange,
       ),
-      home: const MyHomePage(title: 'Tinder with Chuck Norris'),
+      home: const MyHomePage(),
     );
   }
 }
