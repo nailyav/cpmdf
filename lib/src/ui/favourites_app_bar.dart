@@ -33,23 +33,6 @@ class FavouritesAppBar extends ConsumerWidget implements PreferredSizeWidget {
               ),
             ),
           ),
-          // IconButton(
-          //   icon: const Icon(
-          //     Icons.favorite_outline,
-          //     color: Colors.white,
-          //   ),
-          //   onPressed: () {
-          //     icon: const Icon(
-          //       Icons.favorite,
-          //       color: Colors.white,
-          //     );
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: ((context) => const FavouritesPage()),
-          //       ),
-          //     );
-          //   }
-          // ),
         ],
       ),
     );

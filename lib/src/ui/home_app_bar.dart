@@ -51,29 +51,10 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
                           : ref.read(fetchFavouritesProvider.notifier).addFavourite(snapshot.data!);
                     }
                 );
-              } else if (snapshot.hasError) {
-                return Text('${snapshot.error}');
               }
               return const CircularProgressIndicator();
             },
           ),
-          // IconButton(
-          //   icon: const Icon(
-          //     Icons.favorite_outline,
-          //     color: Colors.white,
-          //   ),
-          //   onPressed: () {
-          //     icon: const Icon(
-          //       Icons.favorite,
-          //       color: Colors.white,
-          //     );
-          //     Navigator.of(context).push(
-          //       MaterialPageRoute(
-          //         builder: ((context) => const FavouritesPage()),
-          //       ),
-          //     );
-          //   }
-          // ),
         ],
       ),
     );
