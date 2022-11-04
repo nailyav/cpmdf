@@ -5,9 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 
-
 class FetchFavourites extends Notifier<Future<List>> {
-
   final List favourites = [];
 
   Future<String> getLocalPath() async {
@@ -48,8 +46,8 @@ class FetchFavourites extends Notifier<Future<List>> {
   }
 
   void removeFavourite(String id) async {
-    final joke = favourites.singleWhere((element) =>
-    element.id == id, orElse: () {
+    final joke =
+        favourites.singleWhere((element) => element.id == id, orElse: () {
       return null;
     });
     joke.isFavourite = false;
@@ -58,6 +56,7 @@ class FetchFavourites extends Notifier<Future<List>> {
   }
 }
 
-final fetchFavouritesProvider = NotifierProvider<FetchFavourites, Future<List>>(() {
+final fetchFavouritesProvider =
+    NotifierProvider<FetchFavourites, Future<List>>(() {
   return FetchFavourites();
 });

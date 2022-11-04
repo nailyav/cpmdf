@@ -4,7 +4,6 @@ import 'package:cpmdf/src/application/fetch_joke.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 import 'package:cpmdf/src/ui/home_app_bar.dart';
 
-
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
@@ -22,7 +21,7 @@ class HomePage extends ConsumerWidget {
             children: <Widget>[
               const Padding(
                 padding:
-                EdgeInsets.only(left: 60, bottom: 10, right: 60, top: 0),
+                    EdgeInsets.only(left: 60, bottom: 10, right: 60, top: 0),
                 child: Image(image: AssetImage('assets/icon.png')),
               ),
               FutureBuilder<Joke>(

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/application/fetch_favourites.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 
-
 class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
   const HomeAppBar(this.joke, this.title, {super.key});
   final Future<Joke> joke;
@@ -43,14 +42,19 @@ class HomeAppBar extends ConsumerWidget implements PreferredSizeWidget {
               if (snapshot.hasData) {
                 return IconButton(
                     icon: Icon(
-                      snapshot.data!.isFavourite ? Icons.favorite : Icons.favorite_border,
+                      snapshot.data!.isFavourite
+                          ? Icons.favorite
+                          : Icons.favorite_border,
                     ),
-                    onPressed: ()
-                    {
-                      snapshot.data!.isFavourite ? ref.read(fetchFavouritesProvider.notifier).removeFavourite(snapshot.data!.id)
-                          : ref.read(fetchFavouritesProvider.notifier).addFavourite(snapshot.data!);
-                    }
-                );
+                    onPressed: () {
+                      snapshot.data!.isFavourite
+                          ? ref
+                              .read(fetchFavouritesProvider.notifier)
+                              .removeFavourite(snapshot.data!.id)
+                          : ref
+                              .read(fetchFavouritesProvider.notifier)
+                              .addFavourite(snapshot.data!);
+                    });
               }
               return const CircularProgressIndicator();
             },

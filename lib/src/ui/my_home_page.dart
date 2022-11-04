@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/ui/favourites_page.dart';
 import 'package:cpmdf/src/ui/home_page.dart';
 
-
 class MyHomePage extends ConsumerWidget {
   const MyHomePage({super.key});
 
@@ -18,23 +17,23 @@ class MyHomePage extends ConsumerWidget {
     ];
 
     return Scaffold(
-      body:pages.elementAt(selectedIndex),
+      body: pages.elementAt(selectedIndex),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_filled),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline_sharp),
-            label: 'Favourites',
-          ),
-        ],
-        currentIndex: selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: (i) {
-          ref.read(indexProvider.notifier).value = i;
-        }),
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_filled),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.favorite_outline_sharp),
+              label: 'Favourites',
+            ),
+          ],
+          currentIndex: selectedIndex,
+          selectedItemColor: Colors.amber[800],
+          onTap: (i) {
+            ref.read(indexProvider.notifier).value = i;
+          }),
     );
   }
 }

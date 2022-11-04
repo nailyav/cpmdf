@@ -4,10 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cpmdf/src/domain/joke_model.dart';
 
-
 Future<Joke> fetchJoke() async {
   final response =
-  await http.get(Uri.parse('https://api.chucknorris.io/jokes/random'));
+      await http.get(Uri.parse('https://api.chucknorris.io/jokes/random'));
 
   if (response.statusCode == 200) {
     return Joke.fromJson(jsonDecode(response.body));
@@ -16,8 +15,7 @@ Future<Joke> fetchJoke() async {
   }
 }
 
-class CallApi extends Notifier<Future<Joke>>{
-
+class CallApi extends Notifier<Future<Joke>> {
   @override
   Future<Joke> build() {
     return fetchJoke();
